@@ -1,5 +1,6 @@
 import streamlit as st
 from bs4 import BeautifulSoup as bs
+import lxml
 import requests
 import pandas as pd
 import cufflinks as plot
