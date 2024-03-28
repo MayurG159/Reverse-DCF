@@ -11,7 +11,7 @@ st.write('This page will help you calculate intrinsic PE of consistent compounde
 st.write('We then compare this with current PE of the stock to calculate degree of overvaluation.')
 a = st.text_input(label='NSE/BSE symbol', value='TATAMOTORS')
 if a:
-    sym = a.upper()
+    sym = a.upper().strip()
 
 # Sliders
 Cost_of_cap1 = st.select_slider(label="Cost of Capital (CoC): %", options=(list(range(8, 17))),value=11)
