@@ -26,7 +26,7 @@ def perc_value(a):
 def get_soup(url):
     response = requests.get(url)
     if response.status_code == 200:
-        return bs(response.text, 'html_parser')
+        return bs(response.text, 'lxml')
     else:
         raise Exception(f"Failed to fetch data from {url}")
 
