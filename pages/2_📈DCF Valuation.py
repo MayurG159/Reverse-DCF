@@ -1,6 +1,5 @@
 import streamlit as st
 from bs4 import BeautifulSoup as bs
-import lxml
 import requests
 import pandas as pd
 import cufflinks as plot
@@ -27,7 +26,7 @@ def perc_value(a):
 def get_soup(url):
     response = requests.get(url)
     if response.status_code == 200:
-        return bs(response.text, 'lxml')
+        return bs(response.text, 'html.parser')
     else:
         raise Exception(f"Failed to fetch data from {url}")
 
