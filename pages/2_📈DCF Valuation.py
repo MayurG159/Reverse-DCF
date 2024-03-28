@@ -35,10 +35,7 @@ def extract_data(symbol):
     consolidated_url = f'https://www.screener.in/company/{symbol}/consolidated/'
     soup = get_soup(consolidated_url)
 
-    ROCE_value = soup.find('div', class_='card card-large').find('div', class_='company-info').find(
-        'div', class_='company-ratios').find_all('li', class_='flex flex-space-between')[6].find('span',
-                                                                                                 class_='nowrap value').span.text.strip().replace(
-        '\n', '')
+    ROCE_value = soup.find('div', class_='card card-large').find('div', class_='company-info').find('div', class_='company-ratios').find_all('li', class_='flex flex-space-between')[6].find('span', class_='nowrap value').span.text.strip().replace('\n', '')
 
     if ROCE_value == '':
         print("Consolidated data not available. Falling back to standalone data.")
@@ -104,10 +101,7 @@ def extract_compounded_growth_data(soup, table_index):
 
 
 def extract_roce_data(soup):
-    ROCE_yr = ((((soup.find('section', id='ratios').find('table', class_='data-table responsive-text-nowrap').find(
-        'tbody')).find_all('tr')[5].text.strip().replace(' ', '').replace(',', ''))).replace('%', '').replace('\n\n',
-                                                                                                              '')).split(
-        '\n')
+    ROCE_yr = ((((soup.find('section', id='ratios').find('table', class_='data-table responsive-text-nowrap').find('tbody')).find_all('tr')[5].text.strip().replace(' ', '').replace(',', ''))).replace('%', '').replace('\n\n','')).split('\n')
     ROCE_yr.remove('ROCE')
     ROCE_yr = [int(value) for value in ROCE_yr]
     ROCE_yr_5yrs = ROCE_yr[-5:]
@@ -185,8 +179,7 @@ def overvaluation(current_pe,FY23PE,intrinsicPE):
 
 
 if __name__ == "__main__":
-    data, year_profit, Comp_sales_year, Comp_sales_values, Comp_profit_year, Comp_profit_values, median = extract_data(
-        sym)
+    data, year_profit, Comp_sales_year, Comp_sales_values, Comp_profit_year, Comp_profit_values, median = extract_data(sym)
     st.write('Stock Symbol: ', sym)
     st.write('Current PE: ' + str(data.get('StockP/E', 'N/A')))
     st.write('FY23PE:' + str(round((data['MarketCap'] / float(year_profit['2022'])), 1)))
